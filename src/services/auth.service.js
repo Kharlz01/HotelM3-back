@@ -2,7 +2,7 @@ import {
   hash, 
   genSalt, 
   compare,
-} from 'bcrypt';
+} from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
 export async function hashPassword(plain) {
