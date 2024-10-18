@@ -1,4 +1,5 @@
 import {User,} from '../database/models/index.js';
+import { hashPassword, verifyPassword } from '../services/auth.service.js';
 
 export async function getCurrentUserInfo(req, res) {
     const userId = req.userId;
@@ -133,4 +134,52 @@ export async function updateUser(req, res) {
       message: `Algo salio mal. Error: ${err.message}`,
     });
   }
+
+
+}
+
+export async function changePassword(req, res) {
+  const {
+    currentPassword,
+    newPassword
+  } = req.body;
+
+  const userId = req.userId;
+
+  try {
+    const user = await User.findOne ({
+      where: {
+        id: userId
+      }
+    });
+
+    const verifiedPassword = await verifyPassword(currentPassword,user.password);
+
+    if (!verifiedPassword) {
+      return res.status(401).json({
+        success: false,
+        message: 'Las credenciales no coinciden.'
+      })
+    }
+
+    const newHashPassword = await hashPassword(newPassword);
+
+    await user.update({
+      password: newHashPassword
+    });
+
+    await user.save()
+
+    return res.status(201).json({
+      success: true,
+      message: 'La contraseña fue cambiada.'
+    })
+
+  } catch(error) {
+    return res.status(500).json({
+      success: false,
+      message: "Algo salio mal."
+    });
+  }
+  
 }
