@@ -23,7 +23,6 @@ const User = connection.define(
             allowNull: true,
         },
         address: DataTypes.STRING,
-        // TODO: agregar opcion de administrador.
         isAdmin: {
             type: DataTypes.BOOLEAN,
             defaultValue: false,

@@ -50,13 +50,13 @@ export async function createLogin(req,res){
 
     const TWO_HS_IN = 60 * 60 * 2; // Dos horas de caducidad
     const expiresIn = Math.floor(now.getTime() / 1000) + TWO_HS_IN;
-    const issuedAt = Math.floor(now.getTime() / 1000);
+    // const issuedAt = Math.floor(now.getTime() / 1000);
 
     // Claims = sub, exp, iat, iss
     const payload = {
         sub: user.id, // Sub es usuario
         exp: expiresIn, // Exp es el tiempo de expiracion.
-        iat: now.getTime(), // iat es el tiempo de obtecion del token.
+        iat: now.getTime(), // iat es el tiempo de obtencion del token.
         iss: process.env.JWT_ISSUER, // iss es quien emitio el token (servidor).
     }
 

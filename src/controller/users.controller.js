@@ -1,4 +1,4 @@
-import {User,} from '../database/models/index.js';
+import { User,} from '../database/models/index.js';
 import { hashPassword, verifyPassword } from '../services/auth.service.js';
 
 export async function getCurrentUserInfo(req, res) {

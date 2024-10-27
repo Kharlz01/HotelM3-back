@@ -14,6 +14,6 @@ router.get('/:id',getUserById);
 
 router.put('/settings/:id', updateUser);
 
-router.put('/changePassword', changePassword)
+router.put('/changePassword', changePassword);
 
 export default router;

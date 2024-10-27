@@ -44,7 +44,6 @@ async function main() {
     httpServer.listen(port, () => {
         console.log('Server running on port: ', port);   
     });
-    // console.log('Puerto: ',process.env.APP_PORT);
 }
 
 main();
